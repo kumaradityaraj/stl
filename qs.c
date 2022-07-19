@@ -1,0 +1,46 @@
+#include <stdio.h>
+
+void quicksort(int x[10], int first, int last){
+    int temp, pivot, i, j;
+    if(first < last){
+        pivot = first;
+        i = first + 1;
+        j = last;
+        while( i <= j){
+            while(x[i] < x[pivot])
+              i++;
+            while(x[j] > x[pivot])
+              j--;
+            if(i <= j){
+                temp = x[i];
+                x[i] = x[j];
+                x[j] = temp;
+                i++;
+                j--;
+            }
+        }
+        temp = x[pivot];
+        x[pivot] = x[j];
+        x[j] = temp;
+        quicksort(x, first, j-1);
+        quicksort(x, j+1, last);
+    }
+}
+
+int main(){
+    int a[20], i, key, n;
+    printf("Enter the size of the array");
+    scanf("%d", &n);
+    if(n > 0){
+        printf("Enter the elements of the array");
+        for(i = 0; i < n; i++)
+          scanf("%d", &a[i]);
+        quicksort(a, 0, n-1);
+        printf("The elements in sorted order are \n");
+        for(i = 0; i < n; i++){
+            printf("%d\t", a[i]);
+        }
+    }else{
+        printf("Size of array is invalid \n");
+    }
+}
